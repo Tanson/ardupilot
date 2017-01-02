@@ -22,6 +22,9 @@ uint64_t RC_Channel_aux::_function_mask[2];
 bool RC_Channel_aux::_initialised;
 bool RC_Channel_aux::_disable_passthrough;
 
+
+
+
 void
 RC_Channel_aux::set_function_mask(uint8_t fn)
 {
@@ -30,6 +33,14 @@ RC_Channel_aux::set_function_mask(uint8_t fn)
     _function_mask[idx] |= (1ULL<<(uint8_t)bit);
 }
 
+RC_Channel_aux *RC_Channel_aux::rc_channel_aux(uint8_t i)
+{
+   uint8_t pin=i-4;
+   if (pin >= RC_MAX_CHANNELS) {
+            return nullptr;
+        }
+		return _aux_channels[pin];
+}
 void
 RC_Channel_aux::clear_function_mask(void)
 {

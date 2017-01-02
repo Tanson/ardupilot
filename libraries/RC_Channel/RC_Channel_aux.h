@@ -171,7 +171,8 @@ public:
     static void disable_passthrough(bool disable) {
         _disable_passthrough = disable;
     }
-    
+     static RC_Channel_aux *rc_channel_aux(uint8_t i);
+
 private:
     static uint64_t _function_mask[2];
     static bool _initialised;

@@ -37,7 +37,10 @@ const AP_Param::GroupInfo RCMapper::var_info[] = {
     // @User: Advanced
     // @RebootRequired: True
     AP_GROUPINFO("YAW",         3, RCMapper, _ch_yaw, 4),
-
+    AP_GROUPINFO("CH5",         4, RCMapper, _ch_5, 5),
+	AP_GROUPINFO("CH6",         5, RCMapper, _ch_6, 6),
+	AP_GROUPINFO("CH7",         6, RCMapper, _ch_7, 7),
+	AP_GROUPINFO("CH8",         7, RCMapper, _ch_8, 8),
     AP_GROUPEND
 };
 

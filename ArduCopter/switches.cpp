@@ -19,11 +19,11 @@ void Copter::read_control_switch()
 
     // calculate position of flight mode switch
     int8_t switch_position;
-    if      (g.rc_5.get_radio_in() < 1231) switch_position = 0;
-    else if (g.rc_5.get_radio_in() < 1361) switch_position = 1;
-    else if (g.rc_5.get_radio_in() < 1491) switch_position = 2;
-    else if (g.rc_5.get_radio_in() < 1621) switch_position = 3;
-    else if (g.rc_5.get_radio_in() < 1750) switch_position = 4;
+    if      (channel_5->get_radio_in() < 1231) switch_position = 0;
+    else if (channel_5->get_radio_in() < 1361) switch_position = 1;
+    else if (channel_5->get_radio_in() < 1491) switch_position = 2;
+    else if (channel_5->get_radio_in() < 1621) switch_position = 3;
+    else if (channel_5->get_radio_in() < 1750) switch_position = 4;
     else switch_position = 5;
 
     // store time that switch last moved
@@ -134,8 +134,8 @@ void Copter::read_aux_switches()
         return;
     }
 
-    read_aux_switch(g.rc_7, aux_con.CH7_flag, g.ch7_option);
-    read_aux_switch(g.rc_8, aux_con.CH8_flag, g.ch8_option);
+    read_aux_switch((*channel_7), aux_con.CH7_flag, g.ch7_option);
+    read_aux_switch((*channel_8), aux_con.CH8_flag, g.ch8_option);
     read_aux_switch(g.rc_9, aux_con.CH9_flag, g.ch9_option);
     read_aux_switch(g.rc_10, aux_con.CH10_flag, g.ch10_option);
     read_aux_switch(g.rc_11, aux_con.CH11_flag, g.ch11_option);
@@ -151,8 +151,8 @@ void Copter::read_aux_switches()
 void Copter::init_aux_switches()
 {
     // set the CH7 ~ CH12 flags
-    aux_con.CH7_flag = read_3pos_switch(g.rc_7.get_radio_in());
-    aux_con.CH8_flag = read_3pos_switch(g.rc_8.get_radio_in());
+    aux_con.CH7_flag = read_3pos_switch(channel_7->get_radio_in());
+    aux_con.CH8_flag = read_3pos_switch(channel_8->get_radio_in());
     aux_con.CH10_flag = read_3pos_switch(g.rc_10.get_radio_in());
     aux_con.CH11_flag = read_3pos_switch(g.rc_11.get_radio_in());
 
