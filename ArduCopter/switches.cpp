@@ -134,8 +134,8 @@ void Copter::read_aux_switches()
         return;
     }
 
-    read_aux_switch((*channel_7), aux_con.CH7_flag, g.ch7_option);
-    read_aux_switch((*channel_8), aux_con.CH8_flag, g.ch8_option);
+    read_aux_switch(g.rc_7, aux_con.CH7_flag, g.ch7_option);
+    read_aux_switch(g.rc_8, aux_con.CH8_flag, g.ch8_option);
     read_aux_switch(g.rc_9, aux_con.CH9_flag, g.ch9_option);
     read_aux_switch(g.rc_10, aux_con.CH10_flag, g.ch10_option);
     read_aux_switch(g.rc_11, aux_con.CH11_flag, g.ch11_option);

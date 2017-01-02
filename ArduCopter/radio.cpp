@@ -11,12 +11,12 @@ void Copter::default_dead_zones()
 #if FRAME_CONFIG == HELI_FRAME
     channel_throttle->set_default_dead_zone(10);
     channel_yaw->set_default_dead_zone(15);
-    channel_8->set_default_dead_zone(10);
+   channel_8->set_default_dead_zone(10);
 #else
     channel_throttle->set_default_dead_zone(30);
     channel_yaw->set_default_dead_zone(10);
 #endif
-    channel_6->set_default_dead_zone(0);
+   channel_6->set_default_dead_zone(0);
 }
 
 void Copter::init_rc_in()
@@ -35,20 +35,16 @@ void Copter::init_rc_in()
     channel_roll->set_type(RC_CHANNEL_TYPE_ANGLE_RAW);
     channel_pitch->set_type(RC_CHANNEL_TYPE_ANGLE_RAW);
     channel_yaw->set_type(RC_CHANNEL_TYPE_ANGLE_RAW);
-	
-	
-	
 
 	channel_5 = RC_Channel_aux::rc_channel_aux(rcmap.ch5()-1);
     channel_6 = RC_Channel_aux::rc_channel_aux(rcmap.ch6()-1);
     channel_7 = RC_Channel_aux::rc_channel_aux(rcmap.ch7()-1);
     channel_8 = RC_Channel_aux::rc_channel_aux(rcmap.ch8()-1);
-	
     //set auxiliary servo ranges
-    channel_5->set_range_in(0,1000);
-    channel_6->set_range_in(0,1000);
-    channel_7->set_range_in(0,1000);
-    channel_8->set_range_in(0,1000);
+   channel_5->set_range_in(0,1000);
+   channel_6->set_range_in(0,1000);
+   channel_7->set_range_in(0,1000);
+   channel_8->set_range_in(0,1000);
 
     // set default dead zones
     default_dead_zones();
@@ -60,10 +56,12 @@ void Copter::init_rc_in()
  // init_rc_out -- initialise motors and check if pilot wants to perform ESC calibration
 void Copter::init_rc_out()
 {
+    // default frame class to match firmware if possible
+    set_default_frame_class();
+
     motors.set_update_rate(g.rc_speed);
-    motors.set_frame_orientation(g.frame_orientation);
     motors.set_loop_rate(scheduler.get_loop_rate_hz());
-    motors.Init();                                              // motor initialisation
+    motors.init((AP_Motors::motor_frame_class)g2.frame_class.get(), (AP_Motors::motor_frame_type)g.frame_type.get());
 #if FRAME_CONFIG != HELI_FRAME
     motors.set_throttle_range(channel_throttle->get_radio_min(), channel_throttle->get_radio_max());
 #endif
